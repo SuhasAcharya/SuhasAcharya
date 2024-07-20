@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Suhas Acharya | Personal Portfolio",
-  description: "Suhas is a frontend developer with 2 years of experience in mobile as well as web development.",
+  description:
+    "Suhas is a frontend developer with 2 years of experience in mobile as well as web development.",
 };
 
 export default function RootLayout({
