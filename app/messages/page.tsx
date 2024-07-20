@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import useStore from "../store";
 import { useRouter } from "next/navigation";
@@ -23,8 +21,15 @@ const Messages = () => {
         const res = await fetch("/api/getMessages", {
           headers: {
             "Cache-Control": "no-cache", 
+            "Pragma": "no-cache", 
+            "Expires": "0", 
           },
         });
+
+        if (res.status === 304) {
+          console.log("No new messages.");
+          return; 
+        }
 
         if (!res.ok) {
           throw new Error("Failed to fetch messages");
@@ -38,7 +43,7 @@ const Messages = () => {
     };
 
     fetchMessages();
-  }, [login, router]); 
+  }, [login, router]);
 
   const handleLogout = () => {
     setLoginFalse();
@@ -74,13 +79,13 @@ const Messages = () => {
 
   return (
     <div className="w-full p-6 flex flex-col fixed top-2 gap-y-6">
-      <div className=" flex w-full  justify-between items-center">
-        <h1 className="text-2xl font-bold ">
+      <div className="flex w-full justify-between items-center">
+        <h1 className="text-2xl font-bold">
           Welcome Back, Suhas. Here are your Messages! 👀
         </h1>
         <button
           type="submit"
-          className=" bg-red-700 p-2 text-white  rounded-md w-[13rem] dark:text-black dark:text-gray-300 font-bold border-[0.5px] tracking-[2px]"
+          className="bg-red-700 p-2 text-white rounded-md w-[13rem] dark:text-black dark:text-gray-300 font-bold border-[0.5px] tracking-[2px]"
           onClick={handleLogout}
         >
           Logout
@@ -91,9 +96,9 @@ const Messages = () => {
         style={{ maxHeight: "calc(100vh - 150px)" }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {messages.map((item, index) => (
+          {messages.map((item) => (
             <div
-              key={index}
+              key={item._id}
               className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col justify-start items-start h-[18rem] w-[27rem]"
             >
               <MdCancel
