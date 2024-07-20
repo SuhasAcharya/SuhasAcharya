@@ -2,16 +2,17 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import useStore from "../app/store"
+import useStore from "../app/store";
+import { useRouter } from "next/navigation";
 
 const LoginPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const popupRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
-  const setLoginTrue = useStore((state) => state.setLoginTrue)
-  
+  const setLoginTrue = useStore((state) => state.setLoginTrue);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,6 +39,7 @@ const LoginPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       password === process.env.NEXT_PUBLIC_PASSWORD
     ) {
       setLoginTrue();
+      router.push("/messages");
       onClose();
     } else {
       setError("Hey, Are you reallly Suhas? 😏");
@@ -68,7 +70,6 @@ const LoginPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           Login to check DM's 👨🏻‍💻
         </h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        {/* Add your login form here */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input

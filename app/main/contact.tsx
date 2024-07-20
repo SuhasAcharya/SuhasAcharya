@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import SectionHeading from "./section-heading";
+import SectionHeading from "../../components/section-heading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
-import SubmitBtn from "./submit-btn";
+import SubmitBtn from "../../components/submit-btn";
 import toast from "react-hot-toast";
 import { useActiveSectionContext } from "@/context/active-section-context";
 

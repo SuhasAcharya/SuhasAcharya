@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
   try {
     const { senderEmail, message } = await request.json();
     
-    // Simple validation
     if (!senderEmail || !message) {
       return NextResponse.json({ message: "Invalid input data" }, { status: 400 });
     }
