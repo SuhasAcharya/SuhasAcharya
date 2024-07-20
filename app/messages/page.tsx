@@ -13,25 +13,32 @@ const Messages = () => {
   const setLoginFalse = useStore((state) => state.setLoginFalse);
 
   useEffect(() => {
-    if (!login) {
-      router.push("/");
-    } else {
-      const fetchMessages = async () => {
-        try {
-          const res = await fetch("/api/getMessages");
-          if (!res.ok) {
-            throw new Error("Failed to fetch messages");
-          }
-          const data = await res.json();
-          setMessages(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    const fetchMessages = async () => {
+      if (!login) {
+        router.push("/");
+        return;
+      }
 
-      fetchMessages();
-    }
-  }, [login, router]);
+      try {
+        const res = await fetch("/api/getMessages", {
+          headers: {
+            "Cache-Control": "no-cache", 
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch messages");
+        }
+
+        const data = await res.json();
+        setMessages(data);
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    };
+
+    fetchMessages();
+  }, [login, router]); 
 
   const handleLogout = () => {
     setLoginFalse();

@@ -7,6 +7,8 @@ export async function GET() {
   try {
     await connectToMongo();
     const messages = await ContactModel.find({});
+    console.log({messages});
+    
     return NextResponse.json(messages);
   } catch (err) {
     console.error(err);
