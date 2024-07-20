@@ -11,38 +11,39 @@ const Messages = () => {
   const router = useRouter();
   const setLoginFalse = useStore((state) => state.setLoginFalse);
 
+  const fetchMessages = async () => {
+    if (!login) {
+      router.push("/");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/getMessages", {
+        headers: {
+          "Cache-Control": "no-cache", 
+          "Pragma": "no-cache", 
+          "Expires": "0", 
+        },
+      });
+
+      if (res.status === 304) {
+        console.log("No new messages.");
+        return; 
+      }
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch messages");
+      }
+
+      const data = await res.json();
+      setMessages(data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+
+
   useEffect(() => {
-    const fetchMessages = async () => {
-      if (!login) {
-        router.push("/");
-        return;
-      }
-
-      try {
-        const res = await fetch("/api/getMessages", {
-          headers: {
-            "Cache-Control": "no-cache", 
-            "Pragma": "no-cache", 
-            "Expires": "0", 
-          },
-        });
-
-        if (res.status === 304) {
-          console.log("No new messages.");
-          return; 
-        }
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch messages");
-        }
-
-        const data = await res.json();
-        setMessages(data);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
-
     fetchMessages();
   }, [login, router]);
 
