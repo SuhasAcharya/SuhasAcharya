@@ -14,7 +14,7 @@ export default function Contact() {
   const [formState, setFormState] = useState({ senderEmail: "", message: "" });
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { senderEmail, message } = formState;
 
@@ -36,10 +36,11 @@ export default function Contact() {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormState((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
