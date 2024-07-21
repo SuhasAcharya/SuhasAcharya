@@ -106,4 +106,5 @@ export const skillsData = [
   "REST API",
   "Expo",
   "Bootstrap",
+  "Mongo DB"
 ] as const;
