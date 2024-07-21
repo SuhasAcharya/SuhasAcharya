@@ -4,20 +4,22 @@ import ContactModel from '@/model/contact.model';
 import mongoose from 'mongoose';
 
 export async function GET() {
-  console.log('GET /api/getMessages - Starting');
   try {
     await connectToMongo();
-    console.log('Connected to MongoDB');
-    
     const messages = await ContactModel.find({});
-    console.log('Fetched messages:', messages);
+    console.log({ messages });
 
-    return NextResponse.json(messages);
+    const response = NextResponse.json(messages);
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+    response.headers.set('Surrogate-Control', 'no-store');
+
+    return response;
   } catch (err) {
-    console.error('Error fetching messages:', err);
+    console.error(err);
     return NextResponse.json({ message: 'Failed to fetch messages' }, { status: 500 });
   } finally {
     await mongoose.connection.close();
-    console.log('Closed MongoDB connection');
   }
 }

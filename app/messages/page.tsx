@@ -20,7 +20,7 @@ const Messages = () => {
     }
 
     try {
-      const res = await fetch("/api/getMessages", {
+      const res = await fetch(`/api/getMessages?timestamp=${new Date().getTime()}`, {
         headers: {
           "Cache-Control": "no-cache", 
           "Pragma": "no-cache", 
