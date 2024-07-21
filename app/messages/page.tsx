@@ -10,8 +10,10 @@ const Messages = () => {
   const login = useStore((state) => state.login);
   const router = useRouter();
   const setLoginFalse = useStore((state) => state.setLoginFalse);
+  const [isLoading,setIsLoading] = useState(false);
 
   const fetchMessages = async () => {
+    setIsLoading(true);
     if (!login) {
       router.push("/");
       return;
@@ -37,6 +39,7 @@ const Messages = () => {
 
       const data = await res.json();
       setMessages(data);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
@@ -80,7 +83,12 @@ const Messages = () => {
   };
 
   return (
-    <div className="w-full p-6 flex flex-col fixed top-2 gap-y-6">
+    <>
+    {isLoading ?
+    <h1 className="w-full h-full flex justify-center items-center"> Loading...</h1>
+    :
+    (
+      <div className="w-full p-6 flex flex-col fixed top-2 gap-y-6">
       <div className="flex w-full justify-between items-center">
         <h1 className="text-2xl font-bold">
           Welcome Back, Suhas. Here are your Messages! 👀
@@ -116,6 +124,10 @@ const Messages = () => {
         </div>
       </div>
     </div>
+    )
+    }
+   
+    </>
   );
 };
 
