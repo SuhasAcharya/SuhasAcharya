@@ -26,10 +26,10 @@ const Messages = () => {
         },
       });
 
-      if (res.status === 304) {
-        console.log("No new messages.");
-        return; 
-      }
+      // if (res.status === 304) {
+      //   console.log("No new messages.");
+      //   return; 
+      // }
 
       if (!res.ok) {
         throw new Error("Failed to fetch messages");
