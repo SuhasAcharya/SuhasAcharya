@@ -10,7 +10,7 @@ export async function GET() {
     console.log("msgs", messages );
 
     const response = NextResponse.json(messages,{status:200});
-    console.log("response", response );
+
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     response.headers.set('Pragma', 'no-cache');
     response.headers.set('Expires', '0');
