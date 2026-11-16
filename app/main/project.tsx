@@ -1,18 +1,27 @@
 "use client";
 
 import { useRef } from "react";
-import { projectsData } from "@/lib/data";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-type ProjectProps = (typeof projectsData)[number];
+// imageUrl and size are optional: a project without a screenshot renders as a
+// full-width text card instead of the half-text / half-image layout.
+type ProjectProps = {
+  title: string;
+  description: string;
+  tags: readonly string[];
+  imageUrl?: StaticImageData;
+  size?: "small" | "big";
+  url?: string;
+};
 
 export default function Project({
   title,
   description,
   tags,
   imageUrl,
-  size
+  size,
+  url,
 }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -22,17 +31,9 @@ export default function Project({
   const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
-  return (
-    <motion.div
-      ref={ref}
-      style={{
-        scale: scaleProgess,
-        opacity: opacityProgess,
-      }}
-      className="group mb-3 sm:mb-8 last:mb-0"
-    >
-      <section className={`bg-gray-100 max-w-[44rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative  ${size==="big" ? "sm:h-[28rem]" : "sm:h-[22rem]"} hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20`}>
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
+  const card = (
+      <section className={`bg-gray-100 max-w-[44rem] border border-black/5 rounded-lg overflow-hidden relative ${imageUrl ? `sm:pr-8 sm:group-even:pl-8 ${size==="big" ? "sm:h-[28rem]" : "sm:h-[22rem]"}` : ""} hover:bg-gray-200 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20`}>
+        <div className={`pt-4 pb-7 px-5 sm:pt-10 flex flex-col h-full ${imageUrl ? "sm:pl-10 sm:pr-2 sm:max-w-[50%] sm:group-even:ml-[18rem]" : "sm:px-10 sm:pb-10"}`}>
           <h3 className="text-2xl font-semibold">{title}</h3>
           <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
             {description}
@@ -49,9 +50,10 @@ export default function Project({
           </ul>
         </div>
 
+        {imageUrl && (
         <Image
           src={imageUrl}
-          alt="Project I worked on"
+          alt={`${title} screenshot`}
           quality={95}
           className="absolute hidden sm:block top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-2xl
         transition 
@@ -66,7 +68,32 @@ export default function Project({
 
         group-even:right-[initial] group-even:-left-40"
         />
+        )}
       </section>
+  );
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        scale: scaleProgess,
+        opacity: opacityProgess,
+      }}
+      className="group mb-3 sm:mb-8 last:mb-0"
+    >
+      {url ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+          aria-label={`Open ${title}`}
+        >
+          {card}
+        </a>
+      ) : (
+        card
+      )}
     </motion.div>
   );
 }

@@ -5,6 +5,9 @@ import { LuGraduationCap } from "react-icons/lu";
 import corpcommentImg from "@/public/corpcomment.png";
 import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
+import dhanvittaImg from "@/public/dhanvitta.jpg";
+import nammabhasheImg from "@/public/nammabhashe.jpg";
+import synkdripImg from "@/public/synkdrip.png";
 
 export const links = [
   {
@@ -36,20 +39,36 @@ export const links = [
 
 export const experiencesData = [
   {
-    title: "Graduated B.Tech",
-    location: "Sahyadri College, Mangalore",
+    title: "Bachelor of Engineering in Computer Science",
+    location: "Sahyadri College of Engineering and Management, Mangaluru",
     description:
-      "I graduated as an Engineer in Computer Science and Information Technology. I immediately found a job as a front-end developer.",
+      "I graduated with a Bachelor of Engineering in Computer Science and immediately found a job as a front-end developer.",
     icon: React.createElement(LuGraduationCap),
-    date: "2018-2022",
+    date: "2018 - 2022",
   },
   {
-    title: "Front-End Developer",
-    location: "Geekyants, Bangalore",
+    title: "Frontend Developer",
+    location: "GeekyAnts, Bangalore",
     description:
-      "Im currently working as a Frontend Developer here since 2 years with experience across all the platforms and frameworks",
+      "I authored core reusable UI components for NativeBase, an open-source cross-platform component library (20K+ GitHub stars, 50K+ dependents) for iOS, Android and web. I engineered a UK maid-booking platform and a real-estate portal with role-based access control (RBAC), live chat, and Hasura GraphQL with Apollo Client. I also built a custom Chrome extension for NFT token extraction and led internal engineering seminars on Zustand state management.",
     icon: React.createElement(CgWorkAlt),
-    date: "2022 - Current",
+    date: "Aug 2022 - Aug 2024",
+  },
+  {
+    title: "Solution Engineer",
+    location: "GammaStack",
+    description:
+      "I architected and delivered 3 high-traffic online casino gaming platforms in the iGaming domain, supporting 10K+ concurrent players at peak, using Next.js, React, Redux and TypeScript. I engineered real-time multiplayer game state with WebSockets and mobile-first responsive interfaces, and cut page load time from 8s to 3s by shrinking the initial JavaScript bundle and deferring non-critical game assets. I led end-to-end client engagements from technical specification to production rollout, meeting strict SLA requirements.",
+    icon: React.createElement(CgWorkAlt),
+    date: "Aug 2024 - Feb 2026",
+  },
+  {
+    title: "Software Engineer II",
+    location: "XCaliber Health",
+    description:
+      "I lead a distributed team of 5+ engineers and interns building the enterprise Web Control Plane platform, used by all 50+ XCaliber Health customer organizations to manage healthcare operations and integrated with major U.S. Electronic Health Record (EHR) systems. I drive frontend architecture with Next.js, React and TypeScript, and reduced page load time by ~80% by streamlining API data fetching and eliminating redundant re-renders in data-heavy views. I also contribute to backend services and workflow orchestration with Go, Java and Temporal, build features for AgentX, an AI-powered medical voice agent that handles patient calls, appointment booking and medication-related workflows, and automate zero-downtime production deployments with Argo CD and GitHub Actions.",
+    icon: React.createElement(CgWorkAlt),
+    date: "Feb 2026 - Present",
   },
   // {
   //   title: "Full-Stack Developer",
@@ -63,9 +82,34 @@ export const experiencesData = [
 
 export const projectsData = [
   {
-    title: "GeekyAnts",
+    title: "SynkDrip",
     description:
-      " Developed reusable and well-documented UI components for a popular open-source UI library (20k+ stars on GitHub), demonstrating strong IOS and Android Application development skills.",
+      "My startup — premium t-shirts and hoodies with a scannable QR on the back that you control. Wearers set the QR to music, work, or anything they want people to find. Live at synkdrip.com.",
+    tags: ["Startup", "E-commerce", "QR Commerce"],
+    imageUrl: synkdripImg,
+    size: "big",
+    url: "https://synkdrip.com/",
+  },
+  {
+    title: "Dhanvitta",
+    description:
+      "A live fintech learning and market analytics platform. I co-architected it as an initial core developer, and it grew to $100K in revenue within 7 months of launch. I built real-time Nifty 50 and Bank Nifty sentiment analytics (bullish/bearish) and interactive charts.",
+    tags: ["Fintech", "Real-time Analytics", "Data Visualization"],
+    imageUrl: dhanvittaImg,
+    size: "big",
+  },
+  {
+    title: "Namma Bhashe",
+    description:
+      "A live AI-powered Kannada language trainer. A conversational AI app built with the Google Gemini API, Web Speech API and Text-to-Speech, with bilingual speech recognition, AI grammar correction and animated real-time feedback.",
+    tags: ["Generative AI", "Gemini API", "Web Speech API", "Framer Motion"],
+    imageUrl: nammabhasheImg,
+    size: "big",
+  },
+  {
+    title: "NativeBase",
+    description:
+      "Authored core reusable UI components for NativeBase at GeekyAnts, an open-source cross-platform component library (20K+ GitHub stars, 50K+ dependents) for iOS, Android and web.",
     tags: ["React", "React Native", "CSS", "Tailwind", "Redux"],
     imageUrl: corpcommentImg,
     size:"small"
@@ -89,22 +133,76 @@ export const projectsData = [
 ] as const;
 
 export const skillsData = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "React Native",
-  "Next.js",
-  "Node.js",
-  "Git",
-  "Tailwind",
-  "Redux",
-  "GraphQL",
-  "Apollo",
-  "Framer Motion",
-  "REST API",
-  "Expo",
-  "Bootstrap",
-  "Mongo DB"
+  {
+    category: "Languages",
+    skills: [
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "Go",
+      "Java",
+      "HTML5",
+      "CSS3",
+      "SQL",
+    ],
+  },
+  {
+    category: "Frontend & Mobile",
+    skills: [
+      "React",
+      "Next.js",
+      "React Native",
+      "Redux Toolkit",
+      "Redux Saga",
+      "Zustand",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Chart.js",
+      "Responsive Design",
+      "Web Performance Optimization",
+      "Chrome Extensions",
+      "Expo",
+      "Bootstrap",
+    ],
+  },
+  {
+    category: "Backend & APIs",
+    skills: [
+      "Node.js",
+      "Temporal",
+      "GraphQL",
+      "Apollo Client",
+      "Hasura",
+      "REST APIs",
+      "WebSockets",
+      "Supabase",
+      "MongoDB",
+    ],
+  },
+  {
+    category: "Testing",
+    skills: ["Jest", "Unit Testing"],
+  },
+  {
+    category: "DevOps & Cloud",
+    skills: [
+      "CI/CD",
+      "GitHub Actions",
+      "Argo CD",
+      "Docker",
+      "Git",
+      "Google Cloud (GCP)",
+      "AWS",
+    ],
+  },
+  {
+    category: "AI & LLM",
+    skills: [
+      "Generative AI",
+      "LLM Integration",
+      "Google Gemini API",
+      "AI Voice Agents",
+      "Speech Recognition",
+      "Text-to-Speech (TTS)",
+    ],
+  },
 ] as const;

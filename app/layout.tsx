@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Suhas Acharya | Personal Portfolio",
   description:
-    "Suhas is a frontend developer with 2 years of experience in mobile as well as web development.",
+    "Suhas is a Senior Frontend Engineer with 4+ years of experience building web and mobile applications with React, Next.js, TypeScript and React Native.",
 };
 
 export default function RootLayout({
